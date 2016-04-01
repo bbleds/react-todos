@@ -4,3 +4,18 @@
 h1{
   text-align: center;
 }
+hr{
+  width: 70%;
+}
+#main-wrap input{
+  width: 30%;
+  position: relative;
+  margin: 40px 50px 40px -15%;
+  left: 50%;
+  display: inline-block;
+}
+
+#add-task-container button{
+  margin-left: 50%;
+  margin-top: -5px;
+}
