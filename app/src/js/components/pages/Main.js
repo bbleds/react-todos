@@ -1,20 +1,33 @@
 import React from "react";
-import {Link} from "react-router";
+import _ from "lodash";
 
 const Main = React.createClass({
+  getInitialState: function(){
+    return {
+      tasks: this.props.testData
+    }
+  },
   addTask: function(e){
     const taskName = e.target.parentNode.childNodes[1].value;
     e.target.parentNode.childNodes[1].value = "";
-    this.props.testData.push({task: taskName, completed: false});
+    let currentTasks = this.state.tasks;
+    currentTasks.push({task: taskName, completed: false});
     this.forceUpdate();
   },
   completeTask: function(e){
-    console.log(this);
-    console.log(e.target.parentNode.parentNode.removeChild(e.target.parentNode));
+    const taskText = e.target.parentNode.childNodes[0].textContent;
+    e.target.parentNode.parentNode.removeChild(e.target.parentNode);
+    let currentTasks = this.state.tasks;
+    currentTasks.push({task: taskText, completed: true});
+    this.forceUpdate();
+  },
+  deleteTask: function(e){
+    const taskText = e.target.parentNode.childNodes[0].textContent;
+    e.target.parentNode.parentNode.removeChild(e.target.parentNode);
   },
   render: function() {
     // Repeat Li for every uncompleted task
-    const dataTasks = this.props.testData.map((taskItem)=>{
+    const dataTasks = this.state.tasks.map((taskItem)=>{
       if(!taskItem.completed){
         return(
           <li key={taskItem.task} class="col-md-12">
@@ -25,12 +38,12 @@ const Main = React.createClass({
       }
     });
     // return li for every completed task
-    const completedTasks = this.props.testData.map((taskItem)=>{
+    const completedTasks = this.state.tasks.map((taskItem)=>{
       if(taskItem.completed){
         return(
           <li key={taskItem.task} class="col-md-12">
             {taskItem.task}
-            <button class="btn btn-danger" onClick={this.completeTask}>Delete</button>
+            <button class="btn btn-danger" onClick={this.deleteTask}>Delete</button>
           </li>
         )
       }

@@ -29,9 +29,9 @@
     "babel-preset-stage-0": "^6.5.0",
     "history": "^1.17.0",
     "jquery": "^2.2.2",
+    "lodash": "^4.7.0",
     "react": "^0.14.8",
     "react-dom": "^0.14.8",
-    "react-router": "^2.0.1",
     "webpack": "^1.12.14"
   },
   "devDependencies": {
