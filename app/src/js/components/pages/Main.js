@@ -58,14 +58,17 @@ const Main = React.createClass({
             <button class="btn btn-success" onClick={this.addTask}>Add Task</button>
         </div>
           <hr/>
-          <div class="row">
-            <h1 class="col-md-12">Current To Dos</h1>
-            {dataTasks}
-          </div>
-          <hr/>
-          <div class="row">
-            <h1 class="col-md-12">Completed To Dos</h1>
-            {completedTasks}
+          <div id="add-and-remove-tasks">
+            <div class="row">
+              <h1 class="col-md-12">Current To Dos</h1>
+              {dataTasks}
+            </div>
+            <hr/>
+            <div class="row completed">
+              <h1 class="col-md-12">Completed To Dos</h1>
+              {completedTasks}
+            </div>
+
           </div>
         </div>
       </div>

@@ -1,3 +1,6 @@
+.navbar-brand{
+  cursor: pointer;
+}
 #spacer{
   height: 100px;
 }
@@ -10,12 +13,37 @@ hr{
 #main-wrap input{
   width: 30%;
   position: relative;
-  margin: 40px 50px 40px -15%;
+  margin: 0px 50px 40px -15%;
   left: 50%;
   display: inline-block;
 }
 
 #add-task-container button{
   margin-left: 50%;
-  margin-top: -5px;
+}
+#add-task-container{
+  padding-bottom: 100px;
+}
+
+#add-task-container h1{
+  margin-bottom: 50px;
+}
+
+#add-and-remove-tasks li {
+  text-decoration: none;
+  list-style: none;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  margin-bottom: 30px;
+}
+
+#add-and-remove-tasks button {
+  position: absolute;
+  right: 10%;
+  top: -10px;
+}
+
+.completed span{
+  text-decoration: line-through;
 }
