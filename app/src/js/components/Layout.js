@@ -1,5 +1,5 @@
 import React from "react";
-// // pages/components
+// pages/components
 import Header from "./pages/Header";
 import Main from "./pages/Main";
 
