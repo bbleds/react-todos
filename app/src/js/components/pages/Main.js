@@ -19,8 +19,17 @@ const Main = React.createClass({
     const taskText = e.target.parentNode.childNodes[1].value;
     e.target.parentNode.childNodes[1].value = "";
     let currentTasks = this.state.tasks;
-    currentTasks.push({taskName: taskText, completed: false});
-    this.forceUpdate();
+    const newTask = {taskName: taskText, completed: false};
+    // post data to db
+    $.ajax({
+      url: "/tasks",
+      contentType: "application/json",
+      method: "POST",
+      data: JSON.stringify(newTask)
+    }).done((res)=>{
+      currentTasks.push(res);
+      this.forceUpdate();
+    })
   },
   completeTask: function(e){
     let targetText = e.target.parentNode.childNodes[0].textContent;
@@ -45,7 +54,7 @@ const Main = React.createClass({
     const dataTasks = this.state.tasks.map((taskItem, index)=>{
       if(!taskItem.completed){
         return(
-          <li key={index} class="col-md-12">
+          <li key={taskItem._id} class="col-md-12">
             {taskItem.taskName}
             <button class="btn btn-primary" onClick={this.completeTask}>Completed</button>
           </li>
@@ -56,7 +65,7 @@ const Main = React.createClass({
     const completedTasks = this.state.tasks.map((taskItem, index)=>{
       if(taskItem.completed){
         return(
-          <li key={index} class="col-md-12">
+          <li key={taskItem._id} class="col-md-12">
             {taskItem.taskName}
             <button class="btn btn-danger" onClick={this.deleteTask}>Delete</button>
           </li>
