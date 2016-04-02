@@ -11,5 +11,5 @@ To run this app locally, run the following -
 #Technologies Used
   The major technologies I used for this are:
   1. React
-  2. MongoDb via Mongoose
+  2. MongoDB via Mongoose
   3. Webpack
