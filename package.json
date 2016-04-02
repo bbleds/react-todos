@@ -1,4 +1,4 @@
-npm {
+{
   "name": "react-todos",
   "version": "1.0.0",
   "description": "A todo list application with react",
