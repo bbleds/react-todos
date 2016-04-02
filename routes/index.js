@@ -2,6 +2,7 @@
 
 // ------------ dependencies
 const express = require("express");
+const path = require("path");
 const router = express.Router();
 
 // controllers
@@ -9,7 +10,7 @@ const tasksCtrl = require("../controllers/tasksCtrl");
 
 // default route
 router.get("/", (req, res) => {
-  res.send("hey");
+  res.sendFile(path.resolve('app/src/index.html'));
 });
 
 // api routes

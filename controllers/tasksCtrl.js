@@ -12,16 +12,17 @@ const exportsObject = {
     });
   },
   saveTasks: (req, res) => {
-    const taskToAdd = new Task(
-      {
-        taskName: "Example Task",
-        completed: false
-      });
-
-      taskToAdd.save((err, objectGiven) => {
-        if (err) throw err;
-        res.send("success")
-      })
+    console.log(req.body);
+    // const taskToAdd = new Task(
+    //   {
+    //     taskName: "Example Task Two",
+    //     completed: false
+    //   });
+    //
+    //   taskToAdd.save((err, objectGiven) => {
+    //     if (err) throw err;
+    //     res.send("success")
+    //   })
   }
 };
 

@@ -1,25 +1,40 @@
 import React from "react";
 import _ from "lodash";
+import $ from "jquery";
 
 const Main = React.createClass({
   getInitialState: function(){
     return {
-      tasks: this.props.testData
+      tasks: []
     }
   },
+  componentDidMount: function() {
+   this.serverRequest = $.get("/tasks", function(result) {
+     this.setState({
+       tasks: result
+     });
+   }.bind(this));
+ },
   addTask: function(e){
-    const taskName = e.target.parentNode.childNodes[1].value;
+    const taskText = e.target.parentNode.childNodes[1].value;
     e.target.parentNode.childNodes[1].value = "";
     let currentTasks = this.state.tasks;
-    currentTasks.push({task: taskName, completed: false});
+    currentTasks.push({taskName: taskText, completed: false});
     this.forceUpdate();
   },
   completeTask: function(e){
-    const taskText = e.target.parentNode.childNodes[0].textContent;
-    e.target.parentNode.parentNode.removeChild(e.target.parentNode);
-    let currentTasks = this.state.tasks;
-    currentTasks.push({task: taskText, completed: true});
-    this.forceUpdate();
+    let targetText = e.target.parentNode.childNodes[0].textContent;
+    let updatedTasks = _.filter(this.state.tasks, (item) =>{
+      if(item.taskName === targetText){
+        item.completed = true;
+        return item;
+      } else {
+        return item;
+      }
+    });
+    this.setState({
+      tasks: updatedTasks
+    })
   },
   deleteTask: function(e){
     const taskText = e.target.parentNode.childNodes[0].textContent;
@@ -27,22 +42,22 @@ const Main = React.createClass({
   },
   render: function() {
     // Repeat Li for every uncompleted task
-    const dataTasks = this.state.tasks.map((taskItem)=>{
+    const dataTasks = this.state.tasks.map((taskItem, index)=>{
       if(!taskItem.completed){
         return(
-          <li key={taskItem.task} class="col-md-12">
-            {taskItem.task}
+          <li key={index} class="col-md-12">
+            {taskItem.taskName}
             <button class="btn btn-primary" onClick={this.completeTask}>Completed</button>
           </li>
         )
       }
     });
     // return li for every completed task
-    const completedTasks = this.state.tasks.map((taskItem)=>{
+    const completedTasks = this.state.tasks.map((taskItem, index)=>{
       if(taskItem.completed){
         return(
-          <li key={taskItem.task} class="col-md-12">
-            {taskItem.task}
+          <li key={index} class="col-md-12">
+            {taskItem.taskName}
             <button class="btn btn-danger" onClick={this.deleteTask}>Delete</button>
           </li>
         )
@@ -61,12 +76,12 @@ const Main = React.createClass({
           <div id="add-and-remove-tasks">
             <div class="row">
               <h1 class="col-md-12">Current To Dos</h1>
-              {dataTasks}
+                {dataTasks}
             </div>
             <hr/>
             <div class="row completed">
               <h1 class="col-md-12">Completed To Dos</h1>
-              {completedTasks}
+                {completedTasks}
             </div>
 
           </div>
