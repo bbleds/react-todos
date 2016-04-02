@@ -8,6 +8,7 @@ const Main = React.createClass({
       tasks: []
     }
   },
+
   componentDidMount: function() {
    this.serverRequest = $.get("/tasks", function(result) {
      this.setState({
@@ -15,6 +16,7 @@ const Main = React.createClass({
      });
    }.bind(this));
  },
+
   addTask: function(e){
     const taskText = e.target.parentNode.childNodes[1].value;
     e.target.parentNode.childNodes[1].value = "";
@@ -29,9 +31,11 @@ const Main = React.createClass({
     }).done((res)=>{
       currentTasks.push(res);
       this.forceUpdate();
-    })
+    });
   },
+
   completeTask: function(e){
+    const clickedId = e.target.parentNode.getAttribute("id");
     let targetText = e.target.parentNode.childNodes[0].textContent;
     let updatedTasks = _.filter(this.state.tasks, (item) =>{
       if(item.taskName === targetText){
@@ -41,20 +45,32 @@ const Main = React.createClass({
         return item;
       }
     });
+    // update dom for ux
     this.setState({
       tasks: updatedTasks
     })
+    // update database
+    $.ajax({
+      url: "/tasks",
+      contentType: "application/json",
+      method: "PUT",
+      data: JSON.stringify({itemId: clickedId})
+    })
+
+
   },
+
   deleteTask: function(e){
     const taskText = e.target.parentNode.childNodes[0].textContent;
     e.target.parentNode.parentNode.removeChild(e.target.parentNode);
   },
+
   render: function() {
     // Repeat Li for every uncompleted task
     const dataTasks = this.state.tasks.map((taskItem, index)=>{
       if(!taskItem.completed){
         return(
-          <li key={taskItem._id} class="col-md-12">
+          <li key={taskItem._id} id={taskItem._id} class="col-md-12">
             {taskItem.taskName}
             <button class="btn btn-primary" onClick={this.completeTask}>Completed</button>
           </li>
@@ -65,7 +81,7 @@ const Main = React.createClass({
     const completedTasks = this.state.tasks.map((taskItem, index)=>{
       if(taskItem.completed){
         return(
-          <li key={taskItem._id} class="col-md-12">
+          <li key={taskItem._id} id={taskItem._id} class="col-md-12">
             {taskItem.taskName}
             <button class="btn btn-danger" onClick={this.deleteTask}>Delete</button>
           </li>

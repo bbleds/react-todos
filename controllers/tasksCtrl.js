@@ -21,6 +21,12 @@ const exportsObject = {
         if (err) throw err;
         res.send(objectGiven);
       });
+  },
+  updateTasks: (req, res) => {
+    Task.findByIdAndUpdate(req.body.itemId, {completed: true}, (err, objectUpdated) => {
+      if (err) throw err;
+      res.send(objectUpdated);
+    });
   }
 };
 

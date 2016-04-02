@@ -16,6 +16,7 @@ router.get("/", (req, res) => {
 // api routes
 router.get("/tasks", tasksCtrl.getTasks);
 router.post("/tasks", tasksCtrl.saveTasks);
+router.put("/tasks", tasksCtrl.updateTasks);
 
 
 module.exports = router;
