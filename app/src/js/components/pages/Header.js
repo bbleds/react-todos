@@ -1,17 +1,19 @@
 import React from "react";
 
-export default class Header extends React.Component {
+const Header = React.createClass({
   render(){
     return(
-      <div class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <a class="navbar-brand">React To Do</a>
+      <div className="navbar navbar-default navbar-fixed-top">
+      <div className="container">
+        <div className="navbar-header">
+          <a className="navbar-brand">React To Do</a>
         </div>
-        <div class="navbar-collapse collapse" id="navbar-main">
+        <div className="navbar-collapse collapse" id="navbar-main">
         </div>
       </div>
     </div>
     );
   }
-}
+});
+
+module.exports = Header;

@@ -77,9 +77,9 @@ const Main = React.createClass({
     const dataTasks = this.state.tasks.map((taskItem, index)=>{
       if(!taskItem.completed){
         return(
-          <li key={taskItem._id} id={taskItem._id} class="col-md-12">
+          <li key={taskItem._id} id={taskItem._id} className="col-md-12">
             {taskItem.taskName}
-            <button class="btn btn-primary" onClick={this.completeTask}>Completed</button>
+            <button className="btn btn-primary" onClick={this.completeTask}>Completed</button>
           </li>
         )
       }
@@ -88,9 +88,9 @@ const Main = React.createClass({
     const completedTasks = this.state.tasks.map((taskItem, index)=>{
       if(taskItem.completed){
         return(
-          <li key={taskItem._id} id={taskItem._id} class="col-md-12">
+          <li key={taskItem._id} id={taskItem._id} className="col-md-12">
             {taskItem.taskName}
-            <button class="btn btn-danger" onClick={this.deleteTask}>Delete</button>
+            <button className="btn btn-danger" onClick={this.deleteTask}>Delete</button>
           </li>
         )
       }
@@ -98,21 +98,21 @@ const Main = React.createClass({
     // main component
     return (
       <div id="main-wrap">
-        <div id="add-task-container" class="container-fluid">
-          <div class="row">
-            <h1 class="col-md-12">Add New To Dos</h1>
-            <input class="form-control" />
-            <button class="btn btn-success" onClick={this.addTask}>Add Task</button>
+        <div id="add-task-container" className="container-fluid">
+          <div className="row">
+            <h1 className="col-md-12">Add New To Dos</h1>
+            <input className="form-control" />
+            <button className="btn btn-success" onClick={this.addTask}>Add Task</button>
         </div>
           <hr/>
           <div id="add-and-remove-tasks">
-            <div class="row">
-              <h1 class="col-md-12">Current To Dos</h1>
+            <div className="row">
+              <h1 className="col-md-12">Current To Dos</h1>
                 {dataTasks}
             </div>
             <hr/>
-            <div class="row completed">
-              <h1 class="col-md-12">Completed To Dos</h1>
+            <div className="row completed">
+              <h1 className="col-md-12">Completed To Dos</h1>
                 {completedTasks}
             </div>
 
