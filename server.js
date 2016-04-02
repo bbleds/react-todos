@@ -4,7 +4,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
-const MONGODB_URL = process.env.MONGO_DB_CONNECTION;
+const MONGODB_URL = "mongodb://demo:demo@ds027415.mlab.com:27415/reacttodo";
 const PORT = process.env.PORT || 3000;
 const app = express();
 
