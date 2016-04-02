@@ -45,24 +45,31 @@ const Main = React.createClass({
         return item;
       }
     });
-    // update dom for ux
+    // update DOM for ux
     this.setState({
       tasks: updatedTasks
     })
-    // update database
+    // update db
     $.ajax({
       url: "/tasks",
       contentType: "application/json",
       method: "PUT",
       data: JSON.stringify({itemId: clickedId})
-    })
-
-
+    });
   },
 
   deleteTask: function(e){
+    const selectedId = e.target.parentNode.getAttribute("id");
     const taskText = e.target.parentNode.childNodes[0].textContent;
     e.target.parentNode.parentNode.removeChild(e.target.parentNode);
+    // update db
+    $.ajax({
+      url: "/tasks",
+      method: "DELETE",
+      headers:{
+        "id": selectedId
+      }
+    })
   },
 
   render: function() {

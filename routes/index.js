@@ -17,6 +17,7 @@ router.get("/", (req, res) => {
 router.get("/tasks", tasksCtrl.getTasks);
 router.post("/tasks", tasksCtrl.saveTasks);
 router.put("/tasks", tasksCtrl.updateTasks);
+router.delete("/tasks", tasksCtrl.deleteTasks);
 
 
 module.exports = router;

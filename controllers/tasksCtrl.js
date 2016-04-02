@@ -27,6 +27,11 @@ const exportsObject = {
       if (err) throw err;
       res.send(objectUpdated);
     });
+  },
+  deleteTasks: (req, res) => {
+    Task.findByIdAndRemove(req.headers.id, (err, objectDeleted)=>{
+      res.send(objectDeleted);
+    });
   }
 };
 
